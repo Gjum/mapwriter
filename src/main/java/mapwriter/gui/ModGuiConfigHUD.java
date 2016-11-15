@@ -14,6 +14,7 @@ import mapwriter.map.mapmode.MapMode;
 import mapwriter.util.Reference;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
@@ -22,6 +23,10 @@ import net.minecraftforge.fml.client.config.GuiConfigEntries;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.CategoryEntry;
 import net.minecraftforge.fml.client.config.GuiConfigEntries.IConfigEntry;
 import net.minecraftforge.fml.client.config.IConfigElement;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 
 public class ModGuiConfigHUD extends GuiConfig
 {
@@ -339,8 +344,14 @@ public class ModGuiConfigHUD extends GuiConfig
 
 		UpdateButtonValues();
 
+		// sharp block pixel edges
+		float filterBefore = glGetTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER);
+		GlStateManager.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 		// draw the map
 		this.map.drawDummy();
+
+		GlStateManager.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterBefore);
 	}
 
 	private void UpdateButtonValues()
