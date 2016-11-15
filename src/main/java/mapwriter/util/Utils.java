@@ -179,13 +179,15 @@ public class Utils
 		else
 		{
 			worldName = Minecraft.getMinecraft().getCurrentServerData().serverIP;
+			int portSeparatorIndex = worldName.indexOf(":");
 			if (!Config.portNumberInWorldNameEnabled)
 			{
-				worldName = worldName.substring(0, worldName.indexOf(":"));
+				if (portSeparatorIndex != -1)
+					worldName = worldName.substring(0, portSeparatorIndex);
 			}
 			else
 			{
-				if (worldName.indexOf(":") == -1)
+				if (portSeparatorIndex == -1)
 				{// standard port is missing. Adding it
 					worldName += "_25565";
 				}
