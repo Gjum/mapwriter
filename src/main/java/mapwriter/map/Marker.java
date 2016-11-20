@@ -57,7 +57,7 @@ public class Marker
 	public void draw(MapMode mapMode, MapView mapView, int borderColour)
 	{
 		double scale = mapView.getDimensionScaling(this.dimension);
-		Point.Double p = mapMode.getClampedScreenXY(mapView, this.x * scale, this.z * scale);
+		Point.Double p = mapMode.getClampedScreenXY(mapView, (this.x + .5) * scale, (this.z + .5) * scale);
 		this.screenPos.setLocation(
 				p.x + mapMode.getXTranslation(),
 				p.y + mapMode.getYTranslation());
