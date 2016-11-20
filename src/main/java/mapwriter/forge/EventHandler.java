@@ -2,6 +2,7 @@ package mapwriter.forge;
 
 import java.util.ArrayList;
 
+import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.mojang.realmsclient.RealmsMainScreen;
@@ -36,6 +37,12 @@ public class EventHandler
 	public EventHandler(Mw mw)
 	{
 		this.mw = mw;
+	}
+
+	@SubscribeEvent
+	public void eventJoinWorld(FMLNetworkEvent.ClientConnectedToServerEvent event)
+	{
+		this.mw.ready = false;
 	}
 
 	@SubscribeEvent
