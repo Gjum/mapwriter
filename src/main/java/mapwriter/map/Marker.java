@@ -5,8 +5,6 @@ import java.awt.Point;
 import mapwriter.map.mapmode.MapMode;
 import mapwriter.util.Render;
 import mapwriter.util.Utils;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 public class Marker
 {
@@ -87,14 +85,6 @@ public class Marker
 					&& (this.y == m.y) && (this.z == m.z) && (this.dimension == m.dimension);
 		}
 		return false;
-	}
-
-	public double getDistanceToMarker(Entity entityIn)
-	{
-		double d0 = this.x - entityIn.posX;
-		double d1 = this.y - entityIn.posY;
-		double d2 = this.z - entityIn.posZ;
-		return MathHelper.sqrt_double((d0 * d0) + (d1 * d1) + (d2 * d2));
 	}
 
 	public float getRed()

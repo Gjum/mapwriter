@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.ARBDepthClamp.GL_DEPTH_CLAMP;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 
 import mapwriter.config.Config;
@@ -496,7 +497,7 @@ public class MarkerManager
 		float fBlue = m.getBlue();
 		float fAlpha = 0.2f;
 
-		double distance = m.getDistanceToMarker(renderManager.renderViewEntity);
+		double distance = MathHelper.sqrt_double((x * x) + (y * y) + (z * z));
 
 		String strText = m.name;
 		String strDistance = " (" + (int) distance + "m)";
