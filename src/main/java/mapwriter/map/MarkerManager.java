@@ -483,7 +483,6 @@ public class MarkerManager
 
 	public void drawLabel(Marker m)
 	{
-		float growFactor = 0.17F;
 		Minecraft mc = Minecraft.getMinecraft();
 		RenderManager renderManager = mc.getRenderManager();
 		FontRenderer fontrenderer = mc.fontRendererObj;
@@ -492,11 +491,6 @@ public class MarkerManager
 		double y = (0.5D + m.y) - TileEntityRendererDispatcher.staticPlayerY;
 		double z = (0.5D + m.z) - TileEntityRendererDispatcher.staticPlayerZ;
 
-		float fRed = m.getRed();
-		float fGreen = m.getGreen();
-		float fBlue = m.getBlue();
-		float fAlpha = 0.2f;
-
 		double distance = MathHelper.sqrt_double((x * x) + (y * y) + (z * z));
 
 		String strText = m.name;
@@ -504,17 +498,24 @@ public class MarkerManager
 
 		int strTextWidth = fontrenderer.getStringWidth(strText) / 2;
 		int strDistanceWidth = fontrenderer.getStringWidth(strDistance) / 2;
-		int offstet = 9;
+		int offset = 9;
 
-		float f = (float) (1.0F + ((distance) * growFactor));
-		float f1 = 0.016666668F * f;
+		float fRed = m.getRed();
+		float fGreen = m.getGreen();
+		float fBlue = m.getBlue();
+
+		double clampedDistance = distance < 1 ? 1 : distance;
+		float bgAlpha = (float) (.2 + .3 / clampedDistance);
+		float textAlpha = (float) (.2 + .8 / clampedDistance);
+		int textColor = 0xffffff | ((int) (255 * textAlpha) << 24);
+		double scale = 0.014 * (1 + (distance * 0.17F));
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 		GlStateManager.rotate(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-		GlStateManager.scale(-f1, -f1, f1);
+		GlStateManager.scale(-scale, -scale, scale);
 		GlStateManager.disableLighting();
 		GlStateManager.depthMask(false);
 		GlStateManager.disableDepth();
@@ -530,46 +531,46 @@ public class MarkerManager
 		vertexbuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
 		vertexbuffer
 				.pos(-strTextWidth - 1, (-1), 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		vertexbuffer
 				.pos(-strTextWidth - 1, (8), 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		vertexbuffer
 				.pos(strTextWidth + 1, (8), 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		vertexbuffer
 				.pos(strTextWidth + 1, (-1), 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		tessellator.draw();
 
 		vertexbuffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
 		vertexbuffer
-				.pos(-strDistanceWidth - 1, -1 + offstet, 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.pos(-strDistanceWidth - 1, -1 + offset, 0.0D)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		vertexbuffer
-				.pos(-strDistanceWidth - 1, 8 + offstet, 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.pos(-strDistanceWidth - 1, 8 + offset, 0.0D)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		vertexbuffer
-				.pos(strDistanceWidth + 1, 8 + offstet, 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.pos(strDistanceWidth + 1, 8 + offset, 0.0D)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		vertexbuffer
-				.pos(strDistanceWidth + 1, -1 + offstet, 0.0D)
-				.color(fRed, fGreen, fBlue, fAlpha)
+				.pos(strDistanceWidth + 1, -1 + offset, 0.0D)
+				.color(fRed, fGreen, fBlue, bgAlpha)
 				.endVertex();
 		tessellator.draw();
 
 		GlStateManager.enableTexture2D();
 		GlStateManager.depthMask(true);
 
-		fontrenderer.drawString(strText, -strTextWidth, 0, -1);
-		fontrenderer.drawString(strDistance, -strDistanceWidth, offstet, -1);
+		fontrenderer.drawString(strText, -strTextWidth, 0, textColor);
+		fontrenderer.drawString(strDistance, -strDistanceWidth, offset, textColor);
 
 		GL11.glDisable(GL_DEPTH_CLAMP);
 		GlStateManager.enableDepth();
