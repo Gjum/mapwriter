@@ -115,7 +115,7 @@ public class SurfacePixels
 		this.updateCount++;
 	}
 
-	// get the averaged colour of a 2x2 pixel area in the given pixels
+	/** get the averaged colour of a 2x2 pixel area in the given pixels */
 	public static int getAverageOfPixelQuad(int[] pixels, int offset, int scanSize)
 	{
 		int p00 = pixels[offset];
@@ -133,9 +133,11 @@ public class SurfacePixels
 		return 0xff000000 | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
 	}
 
-	// update an area of pixels in this region from an area of pixels in
-	// srcPixels,
-	// scaling the pixels by 50%.
+	/**
+	update an area of pixels in this region from an area of pixels in
+	srcPixels,
+	scaling the pixels by 50%.
+	*/
 	public void updateScaled(int[] srcPixels, int srcX, int srcZ, int dstX, int dstZ, int dstW, int dstH)
 	{
 		int[] dstPixels = this.getOrAllocatePixels();

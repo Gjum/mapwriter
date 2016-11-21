@@ -369,10 +369,12 @@ public class BlockColours
 	// Methods for loading block colours from file:
 	//
 
-	// read biome colour multiplier values.
-	// line format is:
-	// biome <biomeId> <waterMultiplier> <grassMultiplier> <foliageMultiplier>
-	// accepts "*" wildcard for biome id (meaning for all biomes).
+	/**
+	read biome colour multiplier values.
+	line format is:
+	biome <biomeId> <waterMultiplier> <grassMultiplier> <foliageMultiplier>
+	accepts "*" wildcard for biome id (meaning for all biomes).
+	*/
 	private void loadBiomeLine(String[] split)
 	{
 		try
@@ -395,12 +397,14 @@ public class BlockColours
 		}
 	}
 
-	// read block colour values.
-	// line format is:
-	// block <blockName> <blockMeta> <colour>
-	// the biome id, meta value, and colour code are in hex.
-	// accepts "*" wildcard for biome id and meta (meaning for all blocks and/or
-	// meta values).
+	/**
+	read block colour values.
+	line format is:
+	block <blockName> <blockMeta> <colour>
+	the biome id, meta value, and colour code are in hex.
+	accepts "*" wildcard for biome id and meta (meaning for all blocks and/or
+	meta values).
+	*/
 	private void loadBlockLine(String[] split)
 	{
 		try
@@ -495,7 +499,7 @@ public class BlockColours
 	// Methods for saving block colours to file.
 	//
 
-	// save biome colour multipliers to a file.
+	/** save biome colour multipliers to a file. */
 	public void saveBiomes(Writer fout) throws IOException
 	{
 		fout.write("biome * ffffff ffffff ffffff\n");
@@ -541,12 +545,14 @@ public class BlockColours
 		return mostOccurringKey;
 	}
 
-	// to use the least number of lines possible find the most commonly
-	// occurring
-	// item for the different meta values of a block.
-	// an 'item' is either a block colour or a block type.
-	// the most commonly occurring item is then used as the wildcard entry for
-	// the block, and all non matching items added afterwards.
+	/**
+	to use the least number of lines possible find the most commonly
+	occurring
+	item for the different meta values of a block.
+	an 'item' is either a block colour or a block type.
+	the most commonly occurring item is then used as the wildcard entry for
+	the block, and all non matching items added afterwards.
+	*/
 	private static void writeMinimalBlockLines(Writer fout, String lineStart, List<String> items,
 			String defaultItem) throws IOException
 	{
@@ -644,7 +650,7 @@ public class BlockColours
 		}
 	}
 
-	// save block colours and biome colour multipliers to a file.
+	/** save block colours and biome colour multipliers to a file. */
 	public void saveToFile(File f)
 	{
 		Writer fout = null;

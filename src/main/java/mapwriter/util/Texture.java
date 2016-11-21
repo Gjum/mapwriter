@@ -16,7 +16,7 @@ public class Texture
 	public final int h;
 	private final IntBuffer pixelBuf;
 
-	// allocate new texture and fill from IntBuffer
+	/** allocate new texture and fill from IntBuffer */
 	public Texture(int w, int h, int fillColour, int minFilter, int maxFilter, int textureWrap)
 	{
 		this.id = GlStateManager.generateTexture();
@@ -44,7 +44,7 @@ public class Texture
 		this(w, h, fillColour, GL11.GL_LINEAR, GL11.GL_NEAREST, GL12.GL_CLAMP_TO_EDGE);
 	}
 
-	// create from existing texture
+	/** create from existing texture */
 	public Texture(int id)
 	{
 		this.id = id;
@@ -61,7 +61,7 @@ public class Texture
 				this.pixelBuf.limit());
 	}
 
-	// free up the resources used by the GL texture
+	/** free up the resources used by the GL texture */
 	public synchronized void close()
 	{
 		if (this.id != 0)
@@ -101,8 +101,10 @@ public class Texture
 		}
 	}
 
-	// Copy a rectangular sub-region of dimensions 'w' x 'h' from the pixel
-	// buffer to the array 'pixels'.
+	/**
+	Copy a rectangular sub-region of dimensions 'w' x 'h' from the pixel
+	buffer to the array 'pixels'.
+	*/
 	public synchronized void getRGB(int x, int y, int w, int h, int[] pixels, int offset,
 			int scanSize, TextureAtlasSprite icon)
 	{
@@ -136,8 +138,8 @@ public class Texture
 		}
 	}
 
-	// Copy a rectangular sub-region of dimensions 'w' x 'h' from the array
-	// 'pixels' to the pixel buffer.
+	/** Copy a rectangular sub-region of dimensions 'w' x 'h' from the array
+	 *'pixels' to the pixel buffer. */
 	public synchronized void setRGB(int x, int y, int w, int h, int[] pixels, int offset,
 			int scanSize)
 	{
@@ -168,7 +170,7 @@ public class Texture
 
 	}
 
-	// set texture scaling and wrapping parameters
+	/** set texture scaling and wrapping parameters */
 	public void setTexParameters(int minFilter, int maxFilter, int textureWrap)
 	{
 		this.bind();
@@ -193,7 +195,7 @@ public class Texture
 		}
 	}
 
-	// update texture from pixels in pixelBuf
+	/** update texture from pixels in pixelBuf */
 	public synchronized void updateTextureArea(int x, int y, int w, int h)
 	{
 		try
@@ -235,7 +237,7 @@ public class Texture
 				this.pixelBuf);
 	}
 
-	// copy pixels from GL texture to pixelBuf
+	/** copy pixels from GL texture to pixelBuf */
 	private synchronized void getPixelsFromExistingTexture()
 	{
 		try

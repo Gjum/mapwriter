@@ -14,23 +14,24 @@ public class MapView implements IMapView
 	private int dimension = 0;
 	private int textureSize = 2048;
 
-	// the position of the centre of the 'view' of the map using game (block)
-	// coordinates
+	/** position of centre of map 'view' using game (block) coordinates */
 	private double x = 0;
+	/** position of centre of map 'view' using game (block) coordinates */
 	private double z = 0;
 
-	// width and height of map to display in pixels
+	/** width of map to display in pixels */
 	private int mapW = 0;
+	/** height of map to display in pixels */
 	private int mapH = 0;
 
-	// the width and height of the map in blocks at zoom level 0.
-	// updated when map width, map height, or texture size changes.
+	/** map width in blocks at zoom level 0. updated when map width or texture size changes */
 	private int baseW = 1;
+	/** map height in blocks at zoom level 0. updated when map height or texture size changes */
 	private int baseH = 1;
 
-	// the width and height of the map in blocks at the current
-	// zoom level.
+	/** the width of the map in blocks at the current zoom level. */
 	private double w = 1;
+	/** the height of the map in blocks at the current zoom level. */
 	private double h = 1;
 
 	private int minZoom;
@@ -150,9 +151,11 @@ public class MapView implements IMapView
 		return Math.max(0, this.zoomLevel);
 	}
 
-	// bX and bZ are the coordinates of the block the zoom is centred on.
-	// The relative position of the block in the view will remain the same
-	// as before the zoom.
+	/**
+	bX and bZ are the coordinates of the block the zoom is centred on.
+	The relative position of the block in the view will remain the same
+	as before the zoom.
+	*/
 	public void zoomToPoint(int newZoomLevel, double bX, double bZ)
 	{
 		int prevZoomLevel = this.zoomLevel;

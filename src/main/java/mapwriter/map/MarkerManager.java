@@ -177,8 +177,10 @@ public class MarkerManager
 		this.save(WorldConfig.getInstance().worldConfiguration, Reference.catMarkers);
 	}
 
-	// returns true if the marker exists in the arraylist.
-	// safe to pass null.
+	/**
+	returns true if the marker exists in the arraylist.
+	safe to pass null.
+	*/
 	public boolean delMarker(Marker markerToDelete)
 	{
 		if (this.selectedMarker == markerToDelete)
@@ -192,8 +194,10 @@ public class MarkerManager
 		return result;
 	}
 
-	// deletes the first marker with matching name and group.
-	// if null is passed as either name or group it means "any".
+	/**
+	deletes the first marker with matching name and group.
+	if null is passed as either name or group it means "any".
+	*/
 	public boolean delMarker(String name, String group)
 	{
 		Marker markerToDelete = null;

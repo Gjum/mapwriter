@@ -78,7 +78,7 @@ public class Utils
 		return (i < 1000) ? outputFile : null;
 	}
 
-	// send an ingame chat message and console log
+	/** send an ingame chat message and console log */
 	public static void printBoth(String msg)
 	{
 		EntityPlayerSP thePlayer = Minecraft.getMinecraft().thePlayer;
@@ -117,11 +117,13 @@ public class Utils
 		return ByteBuffer.allocateDirect(size * 4).order(ByteOrder.nativeOrder()).asIntBuffer();
 	}
 
-	// algorithm from http://graphics.stanford.edu/~seander/bithacks.html (Sean
-	// Anderson)
-	// works by making sure all bits to the right of the highest set bit are 1,
-	// then
-	// adding 1 to get the answer.
+	/**
+	algorithm from http://graphics.stanford.edu/~seander/bithacks.html (Sean
+	Anderson)
+	works by making sure all bits to the right of the highest set bit are 1,
+	then
+	adding 1 to get the answer.
+	*/
 	public static int nextHighestPowerOf2(int v)
 	{
 		// decrement by 1 (to handle cases where v is already a power of two)

@@ -94,8 +94,7 @@ public class Trail
 		this.trailMarkerList.clear();
 	}
 
-	// for other types of trails will need to extend Trail and override this
-	// method
+	/** for other types of trails will need to extend Trail and override this method */
 	public void onTick()
 	{
 		long time = System.currentTimeMillis();

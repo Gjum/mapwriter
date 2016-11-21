@@ -41,10 +41,11 @@ public class ChunkManager
 		this.chunkMap.clear();
 	}
 
-	// create MwChunk from Minecraft chunk.
-	// only MwChunk's should be used in the background thread.
-	// make this a full copy of chunk data to prevent possible race conditions
-	// <-- done
+	/**
+	create MwChunk from Minecraft chunk.
+	only MwChunk's should be used in the background thread.
+	make this a full copy of chunk data to prevent possible race conditions
+	*/
 	public static MwChunk copyToMwChunk(Chunk chunk)
 	{
 		Map<BlockPos, TileEntity> TileEntityMap = Maps.newHashMap();

@@ -16,12 +16,11 @@ import java.util.zip.InflaterInputStream;
 
 import mapwriter.util.Logging;
 
-/*
+/**
  * Anvil region file reader/writer implementation. This code is very similar to
  * RegionFile and RegionFileChunkBuffer from Minecraft. Not sure if it would
  * have been better just to use the Minecraft code.
  */
-
 public class RegionFile
 {
 
@@ -76,8 +75,10 @@ public class RegionFile
 		return (this.fin != null);
 	}
 
-	// set the corresponding bits in filledSectorArray to 'filled'
-	// for 'count' sectors, starting at 'firstSector'.
+	/**
+	set the corresponding bits in filledSectorArray to 'filled'
+	for 'count' sectors, starting at 'firstSector'.
+	*/
 	private void setFilledSectorArray(Section section, boolean filled)
 	{
 		int endSector = section.startSector + section.length;
@@ -361,8 +362,10 @@ public class RegionFile
 		return dis;
 	}
 
-	// basically an in memory byte array that writes its contents
-	// to a file when it is closed.
+	/**
+	basically an in memory byte array that writes its contents
+	to a file when it is closed.
+	*/
 	private class RegionFileChunkBuffer extends ByteArrayOutputStream
 	{
 		private final int x;

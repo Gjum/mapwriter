@@ -10,13 +10,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
-/*
- * MwRender contains most of the code for drawing the overlay. This includes: -
- * loading textures from images - saving textures to images - allocating and
- * setting up GL textures - drawing coloured and textured quads (using minecraft
- * Tesselator class)
+/**
+ * MwRender contains most of the code for drawing the overlay. This includes:
+ * - loading textures from images
+ * - saving textures to images
+ * - allocating and setting up GL textures
+ * - drawing coloured and textured quads (using minecraft Tesselator class)
  */
-
 public class Render
 {
 	public static double zDepth = 0.0D;
@@ -154,14 +154,16 @@ public class Render
 	 * will have already been done.
 	 */
 
-	// draw rectangle with texture stretched to fill the shape
+	/** draw rectangle with texture stretched to fill the shape */
 	public static void drawTexturedRect(double x, double y, double w, double h)
 	{
 		drawTexturedRect(x, y, w, h, 0.0D, 0.0D, 1.0D, 1.0D);
 	}
 
-	// draw rectangle with texture UV coordinates specified (so only part of the
-	// texture fills the rectangle).
+	/**
+	draw rectangle with texture UV coordinates specified (so only part of the
+	texture fills the rectangle).
+	*/
 	public static void drawTexturedRect(double x, double y, double w, double h, double u1, double v1, double u2, double v2)
 	{
 		try

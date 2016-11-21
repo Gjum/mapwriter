@@ -134,8 +134,10 @@ public class Mw
 		}
 	}
 
-	// update the saved player position and orientation
-	// called every tick
+	/**
+	update the saved player position and orientation
+	called every tick
+	*/
 	public void updatePlayer()
 	{
 		// get player pos
@@ -184,7 +186,7 @@ public class Mw
 		}));
 	}
 
-	// cheap and lazy way to teleport...
+	/** cheap and lazy way to teleport... */
 	public void teleportTo(int x, int y, int z)
 	{
 		if (Config.teleportEnabled)
@@ -549,7 +551,7 @@ public class Mw
 		}
 	}
 
-	// add chunk to the set of loaded chunks
+	/** add chunk to the set of loaded chunks */
 	public void onChunkLoad(Chunk chunk)
 	{
 		this.load();
@@ -567,8 +569,10 @@ public class Mw
 		}
 	}
 
-	// remove chunk from the set of loaded chunks.
-	// convert to mwchunk and write chunk to region file if in multiplayer.
+	/**
+	remove chunk from the set of loaded chunks.
+	convert to mwchunk and write chunk to region file if in multiplayer.
+	*/
 	public void onChunkUnload(Chunk chunk)
 	{
 		if (this.ready && (chunk != null) && (chunk
@@ -578,8 +582,10 @@ public class Mw
 		}
 	}
 
-	// from onTick when mc.currentScreen is an instance of GuiGameOver
-	// it's the only option to detect death client side
+	/**
+	from onTick when mc.currentScreen is an instance of GuiGameOver
+	it's the only option to detect death client side
+	*/
 	public void onPlayerDeath()
 	{
 		if (this.ready && (Config.maxDeathMarkers > 0))

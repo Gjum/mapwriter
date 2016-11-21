@@ -15,15 +15,16 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.biome.Biome;
 
-// Static class to generate BlockColours.
-// This is separate from BlockColours because it needs to run in the GL
-// rendering thread
-// whereas the generated BlockColours object is used only in the background
-// thread.
-// So basically split to make it clear that BlockColourGen and the generated
-// BlockColours
-// must not have any interaction after it is generated.
-
+/**
+Static class to generate BlockColours.
+This is separate from BlockColours because it needs to run in the GL
+rendering thread
+whereas the generated BlockColours object is used only in the background
+thread.
+So basically split to make it clear that BlockColourGen and the generated
+BlockColours
+must not have any interaction after it is generated.
+*/
 public class BlockColourGen
 {
 	private static int getIconMapColour(TextureAtlasSprite icon, Texture terrainTexture)
@@ -48,11 +49,11 @@ public class BlockColourGen
 		return Render.getAverageColourOfArray(pixels);
 	}
 
+	/**
+	generate array of foliage, grass, and water colour multipliers for each biome.
+	*/
 	private static void genBiomeColours(BlockColours bc)
 	{
-		// generate array of foliage, grass, and water colour multipliers
-		// for each biome.
-
 		for (Biome biome : Biome.REGISTRY)
 		{
 			if (biome != null)

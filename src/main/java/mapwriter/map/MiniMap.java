@@ -61,7 +61,7 @@ public class MiniMap
 		this.currentMap = null;
 	}
 
-	// toggle between small map, underground map and no map
+	/** toggle between small map, underground map and no map */
 	public MapRenderer nextOverlayMode(int increment)
 	{
 		int size = this.mapList.size();
@@ -76,7 +76,7 @@ public class MiniMap
 		return this.currentMap;
 	}
 
-	// draw the map overlay, player arrow, and markers
+	/** draw the map overlay, player arrow, and markers */
 	public void drawCurrentMap()
 	{
 		if (this.currentMap != null)

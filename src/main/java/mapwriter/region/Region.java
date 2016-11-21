@@ -2,7 +2,7 @@ package mapwriter.region;
 
 import java.io.File;
 
-/*
+/**
  * MwRegion class Represents a 32x32 chunk area (512x512 blocks).
  */
 public class Region
@@ -123,11 +123,13 @@ public class Region
 		return (x >= this.x) && (z >= this.z) && ((x + w) <= (this.x + this.size)) && ((z + h) <= (this.z + this.size)) && (dimension == this.dimension);
 	}
 
-	// scale an area of pixels by half in this region and write them
-	// to the pixels of the next zoom level region.
-	// x, z, w, h, in world block coordinates
-	// returns the region the scaled pixels were written to, or null
-	// on failure.
+	/**
+	scale an area of pixels by half in this region and write them
+	to the pixels of the next zoom level region.
+	x, z, w, h, in world block coordinates
+	returns the region the scaled pixels were written to, or null
+	on failure.
+	*/
 	public Region updateNextZoomLevel(int x, int z, int w, int h)
 	{
 		int[] srcPixels = this.surfacePixels.getPixels();
@@ -156,8 +158,10 @@ public class Region
 		return dstRegion;
 	}
 
-	// update all higher zoom level regions that this region
-	// lies within
+	/**
+	update all higher zoom level regions that this region
+	lies within
+	*/
 	public void updateZoomLevels(int x, int z, int w, int h)
 	{
 		Region nextRegion = this;
@@ -167,7 +171,7 @@ public class Region
 		}
 	}
 
-	// update this entire region in the next zoom level
+	/** update this entire region in the next zoom level */
 	public void updateZoomLevels()
 	{
 		this.updateZoomLevels(this.x, this.z, this.size, this.size);

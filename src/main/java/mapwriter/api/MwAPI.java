@@ -23,13 +23,13 @@ public class MwAPI
 		return dataProviders.values();
 	}
 
-	// Returns the data provider based on its name //
+	/** Returns the data provider based on its name */
 	public static IMwDataProvider getDataProvider(String name)
 	{
 		return dataProviders.get(name);
 	}
 
-	// Returns the name based on the data provider //
+	/** Returns the name based on the data provider */
 	public static String getProviderName(IMwDataProvider provider)
 	{
 		return dataProviders.inverse().get(provider);

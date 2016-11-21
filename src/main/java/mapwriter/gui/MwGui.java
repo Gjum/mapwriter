@@ -145,8 +145,10 @@ public class MwGui extends GuiScreen
 		this.mapView.setZoomLevel(Config.fullScreenZoomLevel);
 	}
 
-	// called when gui is displayed and every time the screen
-	// is resized
+	/**
+	called when gui is displayed and every time the screen
+	is resized
+	*/
 	@Override
 	public void initGui()
 	{
@@ -226,16 +228,18 @@ public class MwGui extends GuiScreen
 		this.updateTooltipLabel.drawToBelowOf(this.helpLabel);
 	}
 
-	// called when a button is pressed
+	/** called when a button is pressed */
 	@Override
 	protected void actionPerformed(GuiButton button)
 	{
 	}
 
-	// get a marker near the specified block pos if it exists.
-	// the maxDistance is based on the view width so that you need to click
-	// closer
-	// to a marker when zoomed in to select it.
+	/**
+	get a marker near the specified block pos if it exists.
+	the maxDistance is based on the view width so that you need to click
+	closer
+	to a marker when zoomed in to select it.
+	*/
 	public Marker getMarkerNearScreenPos(int x, int y)
 	{
 		Marker nearMarker = null;
@@ -319,8 +323,10 @@ public class MwGui extends GuiScreen
 						this.mapView.getDimension()));
 	}
 
-	// c is the ascii equivalent of the key typed.
-	// key is the lwjgl key code.
+	/**
+	c is the ascii equivalent of the key typed.
+	key is the lwjgl key code.
+	*/
 	@Override
 	protected void keyTyped(char c, int key)
 	{
@@ -439,8 +445,10 @@ public class MwGui extends GuiScreen
 		}
 	}
 
-	// override GuiScreen's handleMouseInput to process
-	// the scroll wheel.
+	/**
+	override GuiScreen's handleMouseInput to process
+	the scroll wheel.
+	*/
 	@Override
 	public void handleMouseInput() throws IOException
 	{
@@ -467,7 +475,7 @@ public class MwGui extends GuiScreen
 		super.handleMouseInput();
 	}
 
-	// mouse button clicked. 0 = LMB, 1 = RMB, 2 = MMB
+	/** mouse button clicked. 0 = LMB, 1 = RMB, 2 = MMB */
 	@Override
 	protected void mouseClicked(int x, int y, int button)
 	{
@@ -587,8 +595,10 @@ public class MwGui extends GuiScreen
 		}
 	}
 
-	// mouse button released. 0 = LMB, 1 = RMB, 2 = MMB
-	// not called on mouse movement.
+	/**
+	mouse button released. 0 = LMB, 1 = RMB, 2 = MMB
+	not called on mouse movement.
+	*/
 	@Override
 	protected void mouseReleased(int x, int y, int button)
 	{
@@ -604,7 +614,7 @@ public class MwGui extends GuiScreen
 		}
 	}
 
-	// zoom on mouse direction wheel scroll
+	/** zoom on mouse direction wheel scroll */
 	public void mouseDWheelScrolled(int x, int y, int direction)
 	{
 		Marker marker = this.getMarkerNearScreenPos(x, y);
@@ -666,7 +676,7 @@ public class MwGui extends GuiScreen
 		}
 	}
 
-	// closes this gui
+	/** closes this gui */
 	public void exitGui()
 	{
 		this.mc.displayGuiScreen((GuiScreen) null);
@@ -684,7 +694,7 @@ public class MwGui extends GuiScreen
 		Keyboard.enableRepeatEvents(false);
 	}
 
-	// called every frame
+	/** called every frame */
 	@Override
 	public void updateScreen()
 	{
@@ -732,7 +742,7 @@ public class MwGui extends GuiScreen
 		this.statusLabel.draw();
 	}
 
-	// also called every frame
+	/** also called every frame */
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float f)
 	{
