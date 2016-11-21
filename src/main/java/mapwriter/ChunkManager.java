@@ -220,7 +220,8 @@ public class ChunkManager
 
 	private void addSaveChunkTask(Chunk chunk)
 	{
-		if ((Minecraft.getMinecraft().isSingleplayer() && Config.regionFileOutputEnabledMP) || (!Minecraft.getMinecraft().isSingleplayer() && Config.regionFileOutputEnabledSP))
+		if ((Minecraft.getMinecraft().isSingleplayer() && Config.regionFileOutputEnabledSP)
+				|| (!Minecraft.getMinecraft().isSingleplayer() && Config.regionFileOutputEnabledMP))
 		{
 			if (!chunk.isEmpty())
 			{
