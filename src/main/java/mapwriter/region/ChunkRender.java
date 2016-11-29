@@ -16,13 +16,12 @@ public class ChunkRender
 	public static final double brightenAmplitude = 0.7;
 	public static final double darkenAmplitude = 1.4;
 
-	// get the height shading of a pixel.
-	// requires the pixel to the west and the pixel to the north to have their
-	// heights stored in the alpha channel to work.
-	// the "height" of a pixel is the y value of the first opaque block in
-	// the block column that created the pixel.
-	// height values of 0 and 255 are ignored as these are used as the clear
-	// values for pixels.
+	/**
+	get the height shading of a pixel.
+	requires the pixel to the west and the pixel to the north to have their heights stored in the alpha channel to work.
+	the "height" of a pixel is the y value of the first opaque block in the block column that created the pixel.
+	height values of 0 and 255 are ignored as these are used as the clear values for pixels.
+	*/
 	public static double getHeightShading(int height, int heightW, int heightN)
 	{
 		int samples = 0;
@@ -60,31 +59,27 @@ public class ChunkRender
 				: -Math.pow(-(heightDiffFactor * (1 / 255.0)), darkenExponent) * darkenAmplitude;
 	}
 
-	// calculate the colour of a pixel by alpha blending the colour of each
-	// block
-	// in a column until an opaque block is reached.
-	// y is topmost block height to start rendering at.
-	// for maps without a ceiling y is simply the height of the highest block in
-	// that chunk.
-	// for maps with a ceiling y is the height of the first non opaque block
-	// starting from
-	// the ceiling.
-	//
-	// for every block in the column starting from the highest:
-	// - get the block colour
-	// - get the biome shading
-	// - extract colour components as doubles in the range [0.0, 1.0]
-	// - the shaded block colour is simply the block colour multiplied
-	// by the biome shading for each component
-	// - this shaded block colour is alpha blended with the running
-	// colour for this column
-	//
-	// so the final map colour is an alpha blended stack of all the
-	// individual shaded block colours in the sequence [yStart .. yEnd]
-	//
-	// note that the "front to back" alpha blending algorithm is used
-	// rather than the more common "back to front".
-	//
+	/**
+	calculate the colour of a pixel by alpha blending the colour of each block
+	in a column until an opaque block is reached.
+	y is topmost block height to start rendering at.
+	for maps without a ceiling y is simply the height of the highest block in that chunk.
+	for maps with a ceiling y is the height of the first non opaque block starting from the ceiling.
+
+	for every block in the column starting from the highest:
+	- get the block colour
+	- get the biome shading
+	- extract colour components as doubles in the range [0.0, 1.0]
+	- the shaded block colour is simply the block colour multiplied by the biome shading for each component
+	- this shaded block colour is alpha blended with the running colour for this column
+
+	so the final map colour is an alpha blended stack of all the
+	individual shaded block colours in the sequence [yStart .. yEnd]
+
+	note that the "front to back" alpha blending algorithm is used
+	rather than the more common "back to front".
+
+	*/
 	public static int getColumnColour(BlockColours bc, IChunk chunk, int x, int y, int z,
 			int heightW, int heightN)
 	{
@@ -192,7 +187,7 @@ public class ChunkRender
 						int color = bc.getColour(blockState);
 						int alpha = (color >> 24) & 0xff;
 
-						if (color == -8650628)
+						if (color == 0xff7c007c)
 						{
 							alpha = 0;
 						}
@@ -232,7 +227,7 @@ public class ChunkRender
                 IBlockState blockState = chunk.getBlockState(x, y, z);
 		bcolor = bc.getColour(blockState);
 		alpha = (256-((bcolor >> 24) & 0xff)) / 256;
-		
+
 		if (bcolor == -8650628)
 		{
 			alpha = 1.0;
@@ -242,7 +237,7 @@ public class ChunkRender
 		{
 			alpha = 0.1;
 		}
-                        			
+
 		if (chunk.getLightValue(x, y, z) > 0)
 		{
 			return alpha;
@@ -250,7 +245,7 @@ public class ChunkRender
 		{
 			return 0.0;
 		}
-	
+
 	}
 
 	public static void renderUnderground(BlockColours bc, IChunk chunk, int[] pixels, int offset,
@@ -261,20 +256,20 @@ public class ChunkRender
 		{
 			for (int x = 0; x < MwChunk.SIZE; x++)
 			{
-				
+
 				int color = 0;
 				int red = 0;
 				int blue = 0;
 				int green = 180;
 				double voidbelow = 0;
-				double voidabove = 0;			
+				double voidabove = 0;
 				int lvalue = 0;
 				double alpha = 0;
 
 				int dist = 0;
 				for (int y = startY-1; y >= startY-15;y--)
 				{
-					if (y >=0) 
+					if (y >=0)
 					{
 						alpha = checkBlockOpenAndVisible(bc, chunk, x, y, z);
 						if (alpha > 0)
@@ -300,7 +295,7 @@ public class ChunkRender
 							green = green - (int) (11-(dist));
 							blue = blue + (int) ((16-dist)*alpha);
 						}
-					
+
 					}
 					else
 					{
@@ -312,7 +307,7 @@ public class ChunkRender
 						dist++;
 					}
 				}
-				
+
 				if (checkBlockOpenAndVisible(bc, chunk, x, startY, z)>0)
 				{
 					green = green - 17;
