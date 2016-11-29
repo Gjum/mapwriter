@@ -200,7 +200,7 @@ public class ChunkRender
 				}
 				else
 				{
-					y = chunkMaxY - 1;
+					y = chunkMaxY;
 				}
 
 				int pixelOffset = offset + (z * scanSize) + x;
