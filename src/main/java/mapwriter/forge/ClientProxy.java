@@ -4,6 +4,8 @@ import java.io.File;
 
 import mapwriter.Mw;
 import mapwriter.api.MwAPI;
+import mapwriter.chunkload.ChunkLoadEventHandler;
+import mapwriter.chunkload.ChunkLoadOverlay;
 import mapwriter.config.ConfigurationHandler;
 import mapwriter.overlay.OverlayGrid;
 import mapwriter.overlay.OverlaySlime;
@@ -16,6 +18,8 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 public class ClientProxy extends CommonProxy
 {
+
+	private ChunkLoadEventHandler chunkLoadEventHandler = new ChunkLoadEventHandler();
 
 	@Override
 	public void preInit(File configFile)
@@ -32,6 +36,8 @@ public class ClientProxy extends CommonProxy
 
 		MwKeyHandler keyEventHandler = new MwKeyHandler();
 		MinecraftForge.EVENT_BUS.register(keyEventHandler);
+
+		MinecraftForge.EVENT_BUS.register(chunkLoadEventHandler);
 	}
 
 	@Override
@@ -62,5 +68,6 @@ public class ClientProxy extends CommonProxy
 		}
 		MwAPI.registerDataProvider("Slime", new OverlaySlime());
 		MwAPI.registerDataProvider("Grid", new OverlayGrid());
+		MwAPI.registerDataProvider("Chunk Loads", new ChunkLoadOverlay(chunkLoadEventHandler));
 	}
 }
